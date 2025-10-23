@@ -37,11 +37,8 @@ graph TD
     REST2 --> MYSQL
     REST4 --> MYSQL
     REST3 --> MONGO[(MongoDB Atlas)]
+```
 
----
-
-### **AWS DevOps / Delivery Flow**
-```markdown
 ```mermaid
 graph LR
     Dev[Developer] --> GH[GitHub]
@@ -53,6 +50,7 @@ graph LR
     EKS --> ALB[AWS ALB]
     EKS --> RDS[(RDS MySQL)]
     EKS --> MONGO[(MongoDB Atlas)]
+```
 
 
 ---
