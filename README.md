@@ -33,22 +33,22 @@ graph TD
       REST --> REST4[User Details Service]
     end
 
-    REST1 --> MYSQL[(AWS RDS - MySQL)]
-    REST2 --> MYSQL
-    REST4 --> MYSQL
+    REST1 --> MYSQL1[(AWS RDS - MySQL)]
+    REST2 --> MYSQL2[(AWS RDS - MySQL)]
+    REST4 --> MYSQL3[(AWS RDS - MySQL)]
     REST3 --> MONGO[(MongoDB Atlas)]
 ```
 
 ```mermaid
 graph LR
-    Dev[Developer] --> GH[GitHub]
-    GH --> JENK[Jenkins (EC2)]
-    JENK --> SONAR[SonarQube]
-    JENK --> DOCKER[DockerHub (tejassrivathsa)]
+    DEV[Developer] --> GIT[GitHub]
+    GIT --> JENKINS[Jenkins (EC2)]
+    JENKINS --> SONAR[SonarQube]
+    JENKINS --> DOCKER[DockerHub (tejassrivathsa)]
     DOCKER --> ARGO[ArgoCD (EKS)]
     ARGO --> EKS[EKS Cluster]
     EKS --> ALB[AWS ALB]
-    EKS --> RDS[(RDS MySQL)]
+    EKS --> RDS[(AWS RDS - MySQL)]
     EKS --> MONGO[(MongoDB Atlas)]
 ```
 
