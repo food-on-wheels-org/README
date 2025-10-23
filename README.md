@@ -46,12 +46,13 @@ graph LR
     JENK --> SONAR[SonarQube]
     JENK --> DOCKER[DockerHub - tejassrivathsa]
     DOCKER --> ARGO[ArgoCD EKS]
-    ARGO --> EKS[EKS Cluster (Pods & Services)]
+    ARGO --> EKS[EKS Cluster - Pods and Services]
     EKS --> RDS[(AWS RDS - MySQL)]
     EKS --> MONGO[(MongoDB Atlas)]
     USER[End User / Angular UI] --> ALB[AWS ALB]
     ALB --> EKS
 ```
+
 
 
 
