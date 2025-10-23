@@ -1,38 +1,61 @@
 # food-on-wheels-app
 ## Overview
-This project is a full-stack food delivery application that simulates food delivery with features like  restaurant listing, restaurant registration, user sign-up and much more. This is being developed as part of a learning curriculum based on multiple Udemy courses, with enhancements and customizations added along the way.
+This project is a full-stack, cloud native food delivery application that simulates food delivery with features like  restaurant listing, restaurant registration, user sign-up and much more. This is being developed as part of a learning curriculum based on multiple Udemy courses, with enhancements and customizations added along the way.
 
 ## Tech Stack:
-- Java Spring Boot (Microservices architecture)
-- Eureka Discovery
-- JUnit
-- Angular (Frontend)
-- MySQL (Database)
-- Docker and Kubernetes (for containerization)
-- Jenkins (Pipeline setup)
-- Sonar (code evaluation)
-- Argo CD (CI/CD setup)
-- AWS EKS
-- AWS ALB
-- AWS EC2
-- AWS RDS
-- Mongo Atlas
-- Lombok
-- Mapstruct
+
+| Category | Stack |
+|-----------|-------|
+| **Backend** | Spring Boot, REST, Microservices, JUnit |
+| **Frontend** | Angular |
+| **Databases** | AWS RDS (MySQL), MongoDB Atlas |
+| **DevOps / CI/CD** | Docker, Kubernetes, Jenkins, ArgoCD, SonarQube |
+| **Cloud Infrastructure** | AWS EKS, EC2, ALB, RDS |
+| **Unit Tests** | JUnit |
+| **API Documentation** | Swagger UI |
+| **Version Control** | GitHub |
+
 
 ---
 
 ## Architecture
 The backend is designed using a microservices architecture, including the following services:
 
-| Service              | Description                                |
-|----------------------|--------------------------------------------|
-| eureka	       | Eureka service registry                    |
-| restaurant-listing   | Restaurant information 		    |
-| menu-directory       | All menus			            |
-| user-details         | User accounts and profiles         	    |
-| order-service        | Cart, orders, and checkout         	    |
-| payment-service      | Dummy payment simulation                   |
+[Angular UI]
+     ↓
+[Ingress / AWS ALB]
+     ↓
+[Eureka Server]
+     ↓
+ ┌──────────────────────────────────────────────────────────────┐
+ |                            Microservices                     |
+ │   Restaurant Listing | Menu Directory | Order | User Details │
+ │                    (Spring Boot REST APIs)                   │
+ └──────────────────────────────────────────────────────────────┘
+      ↓                 ↓
+ [RDS - MySQL]     [MongoDB Atlas]
+
+## AWS Infrastructure Overview
+
+Developer → GitHub → Jenkins (EC2) → SonarQube → DockerHub
+      ↓
+   ArgoCD (EKS)
+      ↓
+   EKS Cluster (Pods + Services)
+      ↓
+   AWS ALB + RDS + Secrets
+
+---
+
+
+## Architecture Highlights
+- Modular microservices using Spring Boot REST APIs
+- Centralized service discovery via Eureka
+- Angular single-page application frontend
+- Dual database architecture: AWS RDS (MySQL) and MongoDB Atlas
+- Kubernetes-based orchestration on AWS EKS
+- Continuous delivery via Jenkins and ArgoCD
+- Code quality management with SonarQube
 
 The frontend (Angular) consumes REST APIs exposed by the gateway.
 
@@ -47,40 +70,26 @@ The frontend (Angular) consumes REST APIs exposed by the gateway.
 - MySQL
 - AWS
 
-### Steps to Run Locally
-1. Clone the repo  
-   ```bash
-   https://github.com/TejasSrivathsa/food-on-wheels-app.git
-   cd food-delivery-app
-   ```
+## Deployment Workflow
+1. Developer pushes code to GitHub.  
+2. Jenkins (running on EC2) builds and tests the project with JUnit and analyzes it through SonarQube.  
+3. Docker images are published to DockerHub (`tejassrivathsa/*`).  
+4. ArgoCD, deployed on EKS, syncs manifests from the `fow-infra` repository.  
+5. AWS ALB routes requests to services running in EKS.
 
-2. Start required containers using Docker Compose:
-   ```bash
-   docker-compose up -d
-   ```
-
-3. Run each microservice manually or via IntelliJ.
-
-4. Start Angular frontend:
-   ```bash
-   cd frontend
-   npm install
-   ng serve
-   ```
-
-5. Open browser at `http://localhost:4200/`
 
 ---
 
-## Folder Structure
-```
-/eureka
-/user-details
-/order-service
-/restaurant-listing
-```
 
----
+| Component              | Description                                |
+|----------------------|--------------------------------------------|
+| eureka-server	       | Eureka service registry                    |
+| restaurant-listing-service   | Restaurant information 		    |
+| menu-directory-service       | All menus			            |
+| user-details-service         | User accounts and profiles         	    |
+| order-service        | Cart, orders, and checkout         	    |
+| fow-ui-app      | Angular front-end                   |
+| fow-infra      | Angular front-end                   |
 
 ## Features (Work in Progress)
 
