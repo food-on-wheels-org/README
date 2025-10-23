@@ -27,10 +27,10 @@ graph TD
     EUREKA --> REST[Spring Boot Microservices]
 
     subgraph Services
-      REST --> REST1[Restaurant Listing Service]
-      REST --> REST2[Menu Directory Service]
-      REST --> REST3[Order Service]
-      REST --> REST4[User Details Service]
+        REST --> REST1[Restaurant Listing Service]
+        REST --> REST2[Menu Directory Service]
+        REST --> REST3[Order Service]
+        REST --> REST4[User Details Service]
     end
 
     REST1 --> MYSQL1[(AWS RDS - MySQL)]
@@ -42,9 +42,9 @@ graph TD
 ```mermaid
 graph LR
     DEV[Developer] --> GIT[GitHub]
-    GIT --> JENKINS[Jenkins (EC2)]
-    JENKINS --> SONAR[SonarQube]
-    JENKINS --> DOCKER[DockerHub (tejassrivathsa)]
+    GIT --> JENK[Jenkins (EC2)]
+    JENK --> SONAR[SonarQube]
+    JENK --> DOCKER[DockerHub (tejassrivathsa)]
     DOCKER --> ARGO[ArgoCD (EKS)]
     ARGO --> EKS[EKS Cluster]
     EKS --> ALB[AWS ALB]
