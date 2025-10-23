@@ -19,31 +19,41 @@ This project is a full-stack, cloud native food delivery application that simula
 ---
 
 ## Architecture
-The backend is designed using a microservices architecture, including the following services:
 
-[Angular UI]
-     ↓
-[Ingress / AWS ALB]
-     ↓
-[Eureka Server]
-     ↓
- ┌──────────────────────────────────────────────────────────────┐
- |                            Microservices                     |
- │   Restaurant Listing | Menu Directory | Order | User Details │
- │                    (Spring Boot REST APIs)                   │
- └──────────────────────────────────────────────────────────────┘
-      ↓                 ↓
- [RDS - MySQL]     [MongoDB Atlas]
+```mermaid
+graph TD
+    UI[Angular UI] --> ALB[Ingress / AWS ALB]
+    ALB --> EUREKA[Eureka Server]
+    EUREKA --> REST[Spring Boot Microservices]
 
-## AWS Infrastructure Overview
+    subgraph Services
+      REST --> REST1[Restaurant Listing Service]
+      REST --> REST2[Menu Directory Service]
+      REST --> REST3[Order Service]
+      REST --> REST4[User Details Service]
+    end
 
-Developer → GitHub → Jenkins (EC2) → SonarQube → DockerHub
-      ↓
-   ArgoCD (EKS)
-      ↓
-   EKS Cluster (Pods + Services)
-      ↓
-   AWS ALB + RDS + Secrets
+    REST1 --> MYSQL[(AWS RDS - MySQL)]
+    REST2 --> MYSQL
+    REST4 --> MYSQL
+    REST3 --> MONGO[(MongoDB Atlas)]
+
+---
+
+### **AWS DevOps / Delivery Flow**
+```markdown
+```mermaid
+graph LR
+    Dev[Developer] --> GH[GitHub]
+    GH --> JENK[Jenkins (EC2)]
+    JENK --> SONAR[SonarQube]
+    JENK --> DOCKER[DockerHub (tejassrivathsa)]
+    DOCKER --> ARGO[ArgoCD (EKS)]
+    ARGO --> EKS[EKS Cluster]
+    EKS --> ALB[AWS ALB]
+    EKS --> RDS[(RDS MySQL)]
+    EKS --> MONGO[(MongoDB Atlas)]
+
 
 ---
 
