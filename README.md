@@ -42,10 +42,10 @@ graph TD
 ```mermaid
 graph LR
     DEV[Developer] --> GIT[GitHub]
-    GIT --> JENK[Jenkins (EC2)]
+    GIT --> JENK[Jenkins EC2]
     JENK --> SONAR[SonarQube]
-    JENK --> DOCKER[DockerHub (tejassrivathsa)]
-    DOCKER --> ARGO[ArgoCD (EKS)]
+    JENK --> DOCKER[DockerHub tejassrivathsa]
+    DOCKER --> ARGO[ArgoCD EKS]
     ARGO --> EKS[EKS Cluster]
     EKS --> ALB[AWS ALB]
     EKS --> RDS[(AWS RDS - MySQL)]
