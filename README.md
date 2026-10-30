@@ -1,6 +1,6 @@
 # food-on-wheels-app
 ## Overview
-This project is a full-stack, cloud native food delivery application that simulates food delivery with features like  restaurant listing, restaurant registration, user sign-up and much more. This is being developed as part of a learning curriculum based on multiple Udemy courses, with enhancements and customizations added along the way.
+This project is a full-stack, cloud native food delivery application that simulates food delivery with features like  restaurant listing, restaurant registration, user sign-up and much more. This is being developed as part of a learning curriculum based on multiple Udemy courses, with enhancements and customizations added along the way. The goal is to keep up with the relevant tools used today.
 
 ## Tech Stack:
 
